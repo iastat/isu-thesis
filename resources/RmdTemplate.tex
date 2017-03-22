@@ -256,7 +256,7 @@ $endif$
 \def\footnote{\protect\rmarkdownfootnote}
 
 %%% Change title format to be more compact
-\usepackage{titling}
+%\usepackage{titling}
 
 % Create subtitle command for use in maketitle
 \newcommand{\subtitle}[1]{
@@ -265,34 +265,47 @@ $endif$
    }
 }
 
-\setlength{\droptitle}{-2em}
+%\setlength{\droptitle}{-2em}
 $if(title)$
  \title{$title$}
- \pretitle{\vspace{\droptitle}\centering\huge}
- \posttitle{\par}
 $else$
  \title{}
- \pretitle{\vspace{\droptitle}}
- \posttitle{}
 $endif$
 $if(subtitle)$
 \subtitle{$subtitle$}
 $endif$
 $if(author)$
  \author{$for(author)$$author$$sep$ \\ $endfor$}
- \preauthor{\centering\large\emph}
- \postauthor{\par}
 $else$
  \author{}
- \preauthor{}\postauthor{}
 $endif$
 $if(date)$
- \predate{\centering\large\emph}
- \postdate{\par}
  \date{$date$}
 $else$
  \date{}
- \predate{}\postdate{}
+$endif$
+
+$if(degree)$
+\degree{$degree$}
+$endif$
+
+$if(major)$
+\major{$major$}
+$endif$
+
+
+
+$if(mprof)$
+\mprof{$for(mprof)$$mprof$$sep$ \\ $endfor$}
+$endif$
+
+
+$if(member)$
+\members{$for(member)$$member$$sep$ \\ $endfor$}
+$endif$
+
+$if(format)$
+\format{$format$}
 $endif$
 
 
@@ -309,16 +322,17 @@ $endfor$
 $if(title)$
 \maketitle
 $endif$
-$if(abstract)$
-\begin{abstract}
-$abstract$
-\end{abstract}
-$endif$
 
 $for(include-before)$
 $include-before$
-
 $endfor$
+
+% Optional thesis dedication
+$if(dedicate)$
+\cleardoublepage \phantomsection
+\include{preface/dedication}
+$endif$
+
 $if(toc)$
 {
 $if(colorlinks)$
@@ -341,7 +355,12 @@ $endif$
 
 
 \cleardoublepage \phantomsection
-\include{acknowl}
+\include{preface/acknowl}
+
+$if(abstract)$
+\specialchapt{ABSTRACT}
+$abstract$
+$endif$
 
 \newpage
 \pagenumbering{arabic}

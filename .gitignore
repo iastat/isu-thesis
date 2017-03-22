@@ -2,6 +2,7 @@
 .Rhistory
 .RData
 docs
+_bookdown_files
 
 isu-thesis.Rproj
 

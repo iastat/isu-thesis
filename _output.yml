@@ -13,5 +13,6 @@ bookdown::pdf_book:
     "--variable", "lof=yes",
     "--variable", "lot=yes",
     "--variable", "colorlinks=yes",
-    "--metadata", "link-citations=true"
+    "--metadata", "link-citations=true",
+    "--chapters"  
   ]

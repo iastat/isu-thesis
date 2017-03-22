@@ -1,5 +1,5 @@
 ---
-title: "Thesis Title"
+title: "Thesis title (not title case)"
 author: Your name
 site: bookdown::bookdown_site
 output: bookdown::pdf_book
@@ -8,6 +8,20 @@ fontsize: 12pt
 bibliography: [resources/refs_1.bib, resources/refs_2.bib]
 url: 'http://your.website.com/thesis-repo-name'
 github-repo: username/thesis-repo-name
+dedicate: true
+degree: DOCTOR OF PHILOSOPHY
+level: doctoral
+formal: dissertation
+major: Statistics
+mprof:
+  - Your Major Prof
+member:
+  - Committee Member
+  - Committee Member
+  - Committee Member
+  - Committee Member
+abstract: |
+  This is your abstract.
 ---
 
 ```{r setup, include=FALSE}
@@ -25,17 +39,15 @@ knitr::opts_chunk$set(
 ```
 
 
-\chapter{PROBLEM STATEMENT}
+# PROBLEM STATEMENT
 
 State the problem.
 
-\chapter{OVERVIEW}
+# OVERVIEW
 
-# Background info
+## Background info
 
 1. You
 2. can
 3. use
 4. lists
-
-\addtocontents{toc}{\protect\newpage}
