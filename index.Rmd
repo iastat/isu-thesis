@@ -1,0 +1,41 @@
+---
+title: "Thesis Title"
+author: Your name
+site: bookdown::bookdown_site
+output: bookdown::pdf_book
+documentclass: isuthesis
+fontsize: 12pt
+bibliography: [resources/refs_1.bib, resources/refs_2.bib]
+url: 'http://your.website.com/thesis-repo-name'
+github-repo: username/thesis-repo-name
+---
+
+```{r setup, include=FALSE}
+options(
+  dplyr.print_min = 6, dplyr.print_max = 6, width = 70,
+  digits = 3, htmltools.dir.version = FALSE
+)
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  cache = TRUE
+)
+```
+
+
+\chapter{PROBLEM STATEMENT}
+
+State the problem.
+
+\chapter{OVERVIEW}
+
+# Background info
+
+1. You
+2. can
+3. use
+4. lists
+
+\addtocontents{toc}{\protect\newpage}

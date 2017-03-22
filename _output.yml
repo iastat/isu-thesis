@@ -1,0 +1,17 @@
+# http://www.grad-college.iastate.edu/current/thesis/organizing_thesis/
+bookdown::pdf_book:
+  template: "resources/RmdTemplate.tex"
+  keep_tex: yes
+  # for some reason setting citation_package: "natbib" borks lof/lot, so
+  # we're going with pandoc-citeproc...also, the default latex engine cuts
+  # off the (cite-proc) Bibliography...
+  # citation_package: "natbib"
+  latex_engine: "xelatex"
+  pandoc_args: [
+    "--variable", "graphics=yes",
+    "--variable", "tables=yes",
+    "--variable", "lof=yes",
+    "--variable", "lot=yes",
+    "--variable", "colorlinks=yes",
+    "--metadata", "link-citations=true"
+  ]
