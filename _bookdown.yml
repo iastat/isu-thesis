@@ -3,6 +3,7 @@ repo: https://github.com/username/thesis-repo-name
 output_dir: docs
 rmd_files: [
   "index.Rmd",
-  "chapters/example.Rmd",
-  "chapters/references.Rmd"
+  "chapters/01_example.Rmd",
+  "appendices/01_appendix.Rmd",
+  "appendices/02_appendix.Rmd"
 ]

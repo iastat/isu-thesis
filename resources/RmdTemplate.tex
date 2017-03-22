@@ -9,7 +9,9 @@ $if(linestretch)$
 \setstretch{$linestretch$}
 $endif$
 
-\usepackage{isutraditional}   \chaptertitle
+\usepackage{isutraditional}   
+\chaptertitle
+\alternate
 
 \usepackage{amssymb,amsmath,mathptmx,stmaryrd}
 \usepackage{ifxetex,ifluatex}
@@ -57,6 +59,19 @@ $endif$
 $if(geometry)$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
+
+$if(natbib)$
+\usepackage{natbib}
+\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+$endif$
+$if(biblatex)$
+\usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+$endif$
+
+
 % http://tex.stackexchange.com/questions/3033/forcing-linebreaks-in-url
 \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 $if(colorlinks)$
@@ -96,17 +111,7 @@ $for(polyglossia-otherlangs)$
 $endfor$
 \fi
 $endif$
-$if(natbib)$
-\usepackage{natbib}
-\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
-$endif$
-$if(biblatex)$
-\usepackage$if(biblio-style)$[style=$biblio-style$]$endif${biblatex}
-$if(biblatexoptions)$\ExecuteBibliographyOptions{$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$}$endif$
-$for(bibliography)$
-\addbibresource{$bibliography$}
-$endfor$
-$endif$
+
 $if(listings)$
 \usepackage{listings}
 $endif$
@@ -284,30 +289,21 @@ $if(date)$
 $else$
  \date{}
 $endif$
-
 $if(degree)$
 \degree{$degree$}
 $endif$
-
 $if(major)$
 \major{$major$}
 $endif$
-
-
-
 $if(mprof)$
 \mprof{$for(mprof)$$mprof$$sep$ \\ $endfor$}
 $endif$
-
-
 $if(member)$
 \members{$for(member)$$member$$sep$ \\ $endfor$}
 $endif$
-
 $if(format)$
 \format{$format$}
 $endif$
-
 
 $for(header-includes)$
 $header-includes$
@@ -316,6 +312,26 @@ $endfor$
 \widowpenalty10000
 \clubpenalty10000
 %\raggedbottom
+
+
+%%%%%%%
+%% Hacks 
+\usepackage{environ}
+
+\NewEnviron{paperinfo_}{%
+  \paperinfo{\BODY}
+  }
+  
+\NewEnviron{paperauthor_}{%
+  \paperauthor{\BODY}
+  }
+  
+\let\oldappendix\appendix
+\renewcommand{\appendix}{
+\appendixtitle 
+\oldappendix
+}
+%%%%%%%
 
 \begin{document}
 
@@ -345,7 +361,8 @@ $endif$
 $endif$
 
 $if(lot)$
-\addcontentsline{toc}{chapter}{LIST OF TABLES}
+\addtocontents{toc}{\def\protect\@chapapp{}} 
+\cleardoublepage \phantomsection \addcontentsline{toc}{chapter}{LIST OF TABLES}
 \listoftables
 $endif$
 $if(lof)$
@@ -353,9 +370,12 @@ $if(lof)$
 \listoffigures
 $endif$
 
+\addtocontents{toc}{\def\protect\@chapapp{CHAPTER\ }}
 
-\cleardoublepage \phantomsection
+\cleardoublepage \phantomsection 
 \include{preface/acknowl}
+
+%\addtocontents{toc}{\def\protect\@chapapp{CHAPTER\ }}
 
 $if(abstract)$
 \specialchapt{ABSTRACT}
@@ -369,24 +389,21 @@ $endif$
 
 $body$
 
-% for some reason this seems to break lof/lot? 
-%$if(natbib)$
-%$if(bibliography)$
-%\renewcommand\bibname{BIBLIOGRAPHY}
-%\unappendixtitle
-%\newpage
-%\phantomsection
-%\addcontentsline{toc}{chapter}{BIBLIOGRAPHY}
-%\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
-%$endif$
-%$endif$
-%
-%$if(biblatex)$
-%\printbibliography$if(biblio-title)$[title=$biblio-title$]
-%$endif$
-
+$if(natbib)$
+$if(bibliography)$
+\renewcommand\bibname{\centerline{BIBLIOGRAPHY}}
+\unappendixtitle
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{BIBLIOGRAPHY}
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
 
 $endif$
+
 $for(include-after)$
 $include-after$
 

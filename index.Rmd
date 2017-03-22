@@ -4,8 +4,9 @@ author: Your name
 site: bookdown::bookdown_site
 output: bookdown::pdf_book
 documentclass: isuthesis
-fontsize: 12pt
+fontsize: 11pt
 bibliography: [resources/refs_1.bib, resources/refs_2.bib]
+biblio-style: apa
 url: 'http://your.website.com/thesis-repo-name'
 github-repo: username/thesis-repo-name
 dedicate: true

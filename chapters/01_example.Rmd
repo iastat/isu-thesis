@@ -1,0 +1,15 @@
+# THIS IS THE TITLE OF THE FIRST PAPER
+
+```{block, type='paperinfo_'}
+published in the *Journal of ABC*
+```
+```{block, type='paperauthor_'}
+Jane Smith and Jesse Adams
+```
+
+## Abstract {-}
+
+This is the abstract to my paper which explains in
+general terms the concepts and hypothesis that will be used.
+
+## Introduction
