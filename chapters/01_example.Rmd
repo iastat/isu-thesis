@@ -14,4 +14,4 @@ general terms the concepts and hypothesis that will be used.
 
 ## Introduction
 
-I use the wonderful software `R` and `ggplot2` for computation and visualization  [@r, @ggplot2].
+I use the wonderful software `R` and `ggplot2` for computation and visualization  [@r; @ggplot2].

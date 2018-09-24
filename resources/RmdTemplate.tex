@@ -391,11 +391,11 @@ $body$
 
 $if(natbib)$
 $if(bibliography)$
-\renewcommand\bibname{\centerline{BIBLIOGRAPHY}}
+\renewcommand\bibname{\centerline{REFERENCES}}
 \unappendixtitle
 \newpage
 \phantomsection
-\addcontentsline{toc}{chapter}{BIBLIOGRAPHY}
+\addcontentsline{toc}{chapter}{REFERENCES}
 \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
 $endif$
 $endif$

@@ -1,7 +1,7 @@
 book_filename: thesis
 repo: https://github.com/username/thesis-repo-name
 output_dir: docs
-clean: [resources/refs1.bib, resources/refs2.bib, bookdown.bbl]
+clean: [bookdown.bbl]
 rmd_files: [
   "index.Rmd",
   "chapters/01_example.Rmd",
