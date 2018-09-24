@@ -221,7 +221,8 @@
 % New Way of setting pages with Geometry
 %  replaces most of the setlength commands below (JAS05 / JAS09)
 \usepackage{geometry}
-\geometry{letterpaper, left=1.25in, top=0.55in, right=1.02in, bottom=1in, includehead=true} 
+\geometry{letterpaper, left=1.5in, top=1in, right=1in, bottom=1in, includehead=true} 
+%\geometry{letterpaper, left=1.25in, top=0.55in, right=1.02in, bottom=1in, includehead=true} 
 % (JAS11) old values: top=1.22 and no includehead option
 
 %\usepackage{isumacros}
@@ -542,7 +543,7 @@
 \def\format#1{\gdef\@format{#1}}            \format{thesis}
 \def\level#1{\gdef\@level{#1}}              \level{Master's}
 \def\degree#1{\gdef\@degree{#1}}            \degree{MASTER OF ARTS}
-\def\mprof#1{\gdef\@mprof{#1, Major Professor}} \def\@mprof{}
+%\def\mprof#1{\gdef\@mprof{#1, Major Professor}} \def\@mprof{}
 \def\submit#1{\gdef\@submit{#1}}            \submit{the graduate faculty}
 
 \newcount\@deptnum  \@deptnum=1
@@ -600,12 +601,24 @@ For the Major Program\fi\fi}
 \def\minor#1{\def\@minor{\\Minor: #1}}
 \def\@minor{}
 
-\def\mprofs#1#2{\def\@mprofs{#1, Co-major Professor\\#2, Co-major Professor} 
-\signmajornum=2} 
+\def\mprof#1{\def\@mprof{#1, Major Professor}\signmajornum=2} \def\@mprof{}
+
+% original changed july 2017
+%\def\mprofs#1#2{\def\@mprofs{#1, Co-major Professor\\#2, Co-major Professor} 
+%\signmajornum=2} 
+%\def\@mprofs{}
+
+\def\mprofs#1{\def\@mprofs{#1, Co-major Professor}} 
 \def\@mprofs{}
+
+\def\cmprofs#1{\def\@cmprofs{\\#1, Co-major Professor}} 
+\def\@cmprofs{}
 
 \def\members#1{\def\@members{\\#1}}
 \def\@members{}
+
+\def\disclaimertitlepage#1{\def\@disclaimertitlepage{#1}}
+\def\@disclaimertitlepage{}
 
 \newcount\@linecount
 \def\makelines#1#2{\@linecount=#1
@@ -705,6 +718,7 @@ For the Major Program\fi\fi}
 % Old maketitle replaced by copy of makenosigtitle for PDF thesis - JAS 1 Nov 06
 
 \long\def\maketitle{\begin{titlepage}
+
 % \vbox ensures whole title page stays on one page even if it becomes overfull
   \vbox to \textheight{
    \begin{center}
@@ -713,30 +727,36 @@ For the Major Program\fi\fi}
    \vskip 14pt                    % Changed from 11pt to more evenly space page (JAS11)
    by \\
    \vskip 14pt                   % Changed from 11pt to more evenly space page (JAS11)
-   \textbf{\@author}
+   {\bfseries \@author}      % Changed to bold at thesis office request (JAS16)
    \vskip 41pt                  % Changed from 30pt to more evenly space page (JAS11)
    A \@format\ submitted to \@submit\ \\
    in partial fulfillment of the requirements for the degree of\\
    \@degree \\[2.5pt]
+
    \vskip 55pt                   % Changed from 30pt to cover dept loss
 %   \@depart
    \@major
 %   \@minor                     % No longer listed - Sept. 2001
    \vskip 41pt                    % Changed from 14pt to more evenly space page (JAS11)
-  % \begin{singlespace}  % Elminated to more evenly space page (JAS11)
+   \begin{singlespace}  % Elminated to more evenly space page (JAS11)
    Program of Study Committee: \\
    \@mprof 
    \@mprofs
+   \@cmprofs
    \@members
    %\end{singlespace}   % Eliminated to more evenly space page (JAS11)
+  \vfill
+   \vspace{12pt} %default was 4 pts
+%   %\vfill
+   \@disclaimertitlepage
+\end{singlespace}   % Eliminated to more evenly space page (JAS11)
    \end{center}
    \vfill
-   \vspace{14pt}
+   \vspace{14pt}%{14pt}
    \vfill
    \@titlefoot } % end of \vbox
    \end{titlepage}
 }% end maketitle
-
 \long\def\makenosigtitle{\begin{titlepage}
 % \vbox ensures whole title page stays on one page even if it becomes overfull
   \vbox to \textheight{
@@ -745,7 +765,7 @@ For the Major Program\fi\fi}
    \vskip 11pt
    by \\
    \vskip 11pt
-   \textbf{\@author}
+   {\bfseries \@author}         % changed from non-bold at thesis office request (JAS16)
    \vskip 30pt
    A \@format\ submitted to \@submit\ \\
    in partial fulfillment of the requirements for the degree of\\
@@ -759,11 +779,16 @@ For the Major Program\fi\fi}
    Program of Study Committee: \\
    \@mprof 
    \@mprofs
+   \@cmprofs
    \@members
    \end{singlespace}
+   \vfill
+%  % \vspace{4pt}
+%   %\vfill
+   \@disclaimertitlepage
    \end{center}
    \vfill
-   \vspace{14pt}
+   \vspace{14pt}%{14pt}
    \vfill
    \@titlefoot } % end of \vbox
    \end{titlepage}
@@ -776,8 +801,9 @@ For the Major Program\fi\fi}
    \@author
    \vskip 11pt
    \begin{singlespace}
-   \@mprof 
-   \@mprofs \\
+  % \@mprof 
+  % \@mprofs \\
+   % \@cmprofs \\
    Iowa State University
    \end{singlespace}
    \end{center}
@@ -875,7 +901,8 @@ For the Major Program\fi\fi}
 
 \renewcommand{\l@chapter}[2]{\addpenalty{-\@highpenalty}
      \vskip 4pt plus 2pt
-     {\bf \@dottedtocline{0}{0em}{1.5em}{\@chapapp#1}{#2}}}
+     %{\bf \@dottedtocline{0}{0em}{1.5em}{\@chapapp#1}{#2}}}
+     {\@dottedtocline{0}{0em}{1.5em}{\@chapapp#1}{#2}}}
 
 % The following lines and a slight redefinition in isucaption allow
 % the word Table and Figure to be placed before Table and Figure entries
@@ -1126,5 +1153,5 @@ For the Major Program\fi\fi}
 \makeatother
 %%%%
 
-\widowpenalty=450                         % three times normal widow penalty
-\clubpenalty=450                          % three times normal orphan penalty
+\widowpenalty=1000                         % three times normal widow penalty
+\clubpenalty=1000                          % three times normal orphan penalty
