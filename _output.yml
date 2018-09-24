@@ -5,7 +5,7 @@ bookdown::pdf_book:
   # for some reason setting citation_package: "natbib" borks lof/lot, so
   # we're going with pandoc-citeproc...also, the default latex engine cuts
   # off the (cite-proc) Bibliography...
-  # citation_package: "natbib"
+  #citation_package: "natbib"
   latex_engine: "xelatex"
   pandoc_args: [
     "--variable", "graphics=yes",
@@ -14,5 +14,5 @@ bookdown::pdf_book:
     "--variable", "lot=yes",
     "--variable", "colorlinks=yes",
     "--metadata", "link-citations=true",
-    "--chapters", "--natbib"
+    "--top-level-division=chapter", "--natbib"
   ]

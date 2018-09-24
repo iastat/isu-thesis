@@ -13,3 +13,7 @@ This is the abstract to my paper which explains in
 general terms the concepts and hypothesis that will be used.
 
 ## Introduction
+
+I use the wonderful software `R` and `ggplot2` for computation and visualization  [@r].
+
+## References

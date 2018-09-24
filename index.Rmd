@@ -1,11 +1,11 @@
 ---
 title: "Thesis title (not title case)"
-author: Your name
+author: "Your name"
 site: bookdown::bookdown_site
 output: bookdown::pdf_book
 documentclass: isuthesis
 fontsize: 11pt
-bibliography: [resources/refs_1.bib, resources/refs_2.bib]
+bibliography: [resources/refs1.bib, resources/refs2.bib]
 biblio-style: apa
 url: 'http://your.website.com/thesis-repo-name'
 github-repo: username/thesis-repo-name
