@@ -11,3 +11,4 @@ Template for ISU PhD Thesis. Blatantly stolen/adapted from @cpsievert [phd-thesi
 ## Avoid headaches with these simple rules 
 
 - Don't use underscores, spaces, or other symbols in file names (- are ok). See [here](https://github.com/rstudio/bookdown/issues/491)
+- Insert images and tables using `knitr::include_graphics()` and `knitr::kable()`, respectively, inside of R code chunks. The reference tag will then be `fig:chunkname` or `tab:chunkname`, respectively. 
